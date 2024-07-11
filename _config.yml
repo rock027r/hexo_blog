@@ -6,7 +6,7 @@ author: John Doe
 language: zh-CN
 timezone: ''
 url: https://rock027r.github.io/hexo_blog
-root: /blog
+root: /hexo_blog
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null
 pretty_urls:
