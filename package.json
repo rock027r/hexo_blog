@@ -25,7 +25,7 @@
     "hexo-server": "^3.0.0",
     "hexo-theme-icarus": "^6.1.0",
     "hexo-theme-landscape": "^1.0.0",
-    "hexo-theme-solitude": "^1.12.3",
+    "hexo-theme-solitude": "^1.13.4",
     "hexo-theme-stellar": "^1.29.1"
   }
 }
