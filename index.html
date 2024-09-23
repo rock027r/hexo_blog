@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hexo</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/hexo_blog/img/pwa/favicon.ico"><!-- index.css--><link rel="stylesheet" href="/hexo_blog/css/index.css?v=1.12.3"><!-- inject head--><link rel="canonical" href="https://rock027r.github.io/hexo_blog/"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="Hexo"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/hexo_blog/img/pwa/favicon.ico"><link rel="apple-touch-icon" href="/hexo_blog/img/pwa/favicon.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '1.12.3' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>let mdate = "7-8,9-18,12-13";
+mdate = (mdate.split(","));
+let ndate = new Date();
+for (let i of mdate) {
+    if (i === (ndate.getMonth()+1) + "-" + (ndate.getDate())) {
+        document.documentElement.classList.add('memorial');
+    }
+}
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+    
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+    
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+    
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+    
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+        
+                if (name && keyObj[name]) return
+        
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+        }
+    })()</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/hexo_blog/',
+    algolia: undefined,
+    localsearch: {"preload":false,"path":"/search.xml"},
+    runtime: '2024-08-1 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.avif'
+    },
+    copyright: {"limit":50,"author":"作者: Locke","link":"链接: ","source":"来源: Hexo","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可","search":{"empty":"找不到你查询的内容：${query}","hit":"找到 ${hits} 条结果，用时 ${time} 毫秒","placeholder":"输入关键词快速查找","count":"共 <b>${count}</b> 条结果。"}},
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: [],
+        sayhello3: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    post_ai: false,
+    right_menu: false,
+};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
+    is_post: false,
+    is_page: false,
+    is_home: true,
+    page: 'solitude',
+    toc: false,
+    comment: false,
+    ai_text: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body" data-type="solitude"><!-- universe--><canvas id="universe"></canvas><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude st-close-fill"></i></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude st-moon-clear-fill"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude st-side-bar-fill"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/hexo_blog/archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/hexo_blog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/hexo_blog/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude st-moon-clear-fill"></i><span>显示模式</span></span></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"></div></div></div></div><!-- keyboard--><div class="page" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/hexo_blog/" title="返回博客主页"><span class="title">Locke</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Hexo</a></div></div><div id="menus"></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索"><i class="solitude st-search-line"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude st-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude st-menu-line"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="home"><div id="category-bar"><div class="category-bar-items home" id="category-bar-items"><div class="category-bar-item select" id="category-bar-home"><a href="/hexo_blog/">首页</a></div><div class="category-bar-item"><a href="/hexo_blog/archives/">全部文章</a></div></div><div class="category-bar-right"><a class="category-bar-more" href="/hexo_blog/categories/">更多</a></div></div><div class="recent-posts" id="recent-posts"><div class="recent-post-item" onclick="pjax.loadUrl('/hexo_blog/2024/09/23/JWT/')"><div class="post_cover"><a href="/hexo_blog/2024/09/23/JWT/" title="JWT介绍"><img class="post_bg" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif" alt="JWT介绍"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><span class="original">最新</span><a class="unvisited-post" href="/hexo_blog/2024/09/23/JWT/">未读</a></div><a class="article-title" href="/hexo_blog/2024/09/23/JWT/" title="JWT介绍">JWT介绍</a></div><div class="content">JWT什么是JWT​	JWT(JSON WEB TOKEN)是一种开放标准（RFC ），它定义了一种紧凑的、自包含的方式，用于在各方之间以 JSON 对象安全地传输信息。JWT 可以对声明进行签名，从而确保数据的真实性和完整性，并且可以加密以保护数据的机密性。JWT 通常用于身份验证和授权场景。
+JWT的组成
+Header（头部）
+&#;  &quot;alg&quot;: &quot;HS&quot;,//加密算法  &quot;typ&quot;: &quot;JWT&quot;//令牌类型&#;
+
+Payload（载荷）
+&#;  &quot;sub&quot;: &quot;&quot;,  &quot;name&quot;: &quot;John Doe&quot;,  &quot;admin&quot;: true&#;
+
+Signature（签名）
+HMACSHA(baseUrlEncode(header) + &quot;.&quot; + baseUrlEncode(payl ...</div><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2024-09-23T11:37:12.321Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/hexo_blog/2024/09/23/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87md5/')"><div class="post_cover"><a href="/hexo_blog/2024/09/23/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87md5/" title="微信小程序中文md5"><img class="post_bg" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif" alt="微信小程序中文md5"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><a class="unvisited-post" href="/hexo_blog/2024/09/23/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87md5/">未读</a></div><a class="article-title" href="/hexo_blog/2024/09/23/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87md5/" title="微信小程序中文md5">微信小程序中文md5</a></div><div class="content">最近在写一个微信小程序用到了md，网上找了很多md中文都有bug。
+ 下面是一个中文无bug的md
+ ...</div><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2024-09-23T11:37:12.321Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/hexo_blog/2024/09/23/%E6%8B%A6%E6%88%AA%E5%99%A8/')"><div class="post_cover"><a href="/hexo_blog/2024/09/23/%E6%8B%A6%E6%88%AA%E5%99%A8/" title="拦截器"><img class="post_bg" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif" alt="拦截器"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><a class="unvisited-post" href="/hexo_blog/2024/09/23/%E6%8B%A6%E6%88%AA%E5%99%A8/">未读</a></div><a class="article-title" href="/hexo_blog/2024/09/23/%E6%8B%A6%E6%88%AA%E5%99%A8/" title="拦截器">拦截器</a></div><div class="content">拦截器什么是拦截器拦截器是一种在发送请求或接收响应之前或之后执行代码的机制。它们允许我们拦截和处理 HTTP 请求和响应，从而允许我们在请求或响应被处理之前进行额外的处理操作。
+拦截器能干什么拦截器可以用于多种目的，包括但不限于：
+
+修改请求或响应的配置：例如添加请求头、处理响应数据等。
+认证和授权：例如在请求中添加认证信息、检查并处理 token 过期等。
+日志记录：记录请求和响应的信息，方便调试和监控。
+错误处理：统一处理请求或响应的错误，例如网络错误、超时等。
+拦截重定向：捕获重定向请求并进行处理，例如在特定条件下自动跳转到登录页面。
+
+import axios from ;axios;;// 创建axios实例const request = axios.create(&#;  baseURL: ;http://localhost:/;,&#;);
+
+请求拦截器// 添加请求拦截器request.interceptors.request.use(async (config) ...</div><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2024-09-23T11:37:12.321Z"></time></span></div></div></div><div class="recent-post-item" onclick="pjax.loadUrl('/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/')"><div class="post_cover"><a href="/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" title="算法笔记"><img class="post_bg" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif" alt="算法笔记"></a></div><div class="recent-post-info"><div class="recent-post-info-top"><div class="recent-post-info-top-tips"><a class="unvisited-post" href="/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">未读</a></div><a class="article-title" href="/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" title="算法笔记">算法笔记</a></div><div class="content">算法学习一、模板#include&lt;bits/stdc++.h&gt;using namespace std;using ll = long long;const int N = e + ;void solve()&#;	&#;int main()&#;	ios::sync_with_stdio(),cin.tie(),cout.tie();//取消同步流 不能使用scanf    int t;cin &gt;&gt; t;    while(t--)    &#;      solve();    &#;    return ;&#;
+
+二、输入输出输出流
+int a = ;cout &lt;&lt; dec &lt;&lt; a &lt;&lt; ;\n;;cout &lt;&lt; oct &lt;&lt; a &lt;&lt; ;\n;;cout &lt;&lt; hex &lt;&lt; a &lt;&lt; ...</div><div class="article-meta-wrap"><span class="article-meta tags"></span><span class="post-meta-date"><time datetime="2024-09-23T11:37:12.321Z"></time></span></div></div></div><!-- pagination--><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><div class="toPageGroup"><input id="toPageText" oninput="value=value.replace(/[^0-9]/g,'')" maxlength="3" title="跳转到指定页面" onkeyup="if (this.value === '0') this.value = ''"><a id="toPageButton" onclick="sco.toPage()"><i class="solitude st-show-right-line"></i></a></div></div></nav></div></div><!-- aside--><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-bg-top"><div class="is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div></div><a class="card-info-avatar" href="/hexo_blog/about/" title="头像"><div class="avatar-img"><img src= "/hexo_blog/img/loading.avif" data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=1011278778&amp;s=640" alt="头像"></div><div class="avatar-sticker"><img class="avatar-sticker-img" src= "/hexo_blog/img/loading.avif" data-lazy-src="https://7.isyangs.cn/34/65f2e4e0423cc-34.png" alt="心情贴纸"></div></a><div class="card-info__desc_group"><div class="author-info__name">Locke</div><div class="author-info__desc"></div><div class="card-info__data is-center"><a href="/hexo_blog/archives/" title="累计文章数:4"><div class="length-num">4</div><div class="headline">文章</div></a><a href="/hexo_blog/tags/" title="标签总数:0"><div class="length-num">0</div><div class="headline">标签</div></a><a href="/hexo_blog/categories/" title="分类总数:0"><div class="length-num">0</div><div class="headline">分类</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/rock027r" title="Github"><i class="solitude  st-github-line"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/357338721" title="Bilibili"><i class="solitude  st-bilibili-line"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://imgos.cn/2024/08/10/66b6ea1d7f9cb.png" title="Wechat"><i class="solitude  st-wechat-line"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"></div><style>.card-tag-cloud::after {
+    display: none !important;
+}</style><hr><div class="webinfo"><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-folder-fill"></i><div class="item-name">文章总数 :</div></div><div class="item-count">4</div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-calendar-todo-fill"></i><div class="item-name">建站天数 :</div></div><div class="item-count" id="runtimeshow"></div></div><div class="webinfo-item"><div class="webinfo-item-title"><i class="item-icon solitude st-loop-left-fill"></i><div class="item-name">最后更新 :</div></div><time class="item-count" datetime="2024-09-23T11:37:25.548Z"></time></div></div></div></div></div></main><footer id="footer"><div id="footer_deal"></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2024 By&nbsp;<a class="footer-bar-link" href="/hexo_blog/">Locke</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" alt="主题">主题</a><a class="footer-bar-link cc" href="/hexo_blog/null" aria-label="copyright"><i class="solitude st-copyright-line"></i><i class="solitude st-creative-commons-by-line"></i><i class="solitude st-creative-commons-nc-line"></i><i class="solitude st-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- right_menu--><!-- inject body--><div><script src="/hexo_blog/js/utils.js?v=1.12.3"></script><script src="/hexo_blog/js/main.js?v=1.12.3"></script><script src="/hexo_blog/js/third_party/waterfall.min.js?v=1.12.3"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/hexo_blog/js/third_party/universe.min.js?v=1.12.3"></script><script>dark()
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/19.1.3/lazyload.iife.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: ['title','#body-wrap','#site-config','meta[name="description"]','.js-pjax','meta[property^="og:"]','#config-diff'],
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><!-- google adsense--><!-- search--><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="solitude st-close-fill"></i></button></nav><div class="search-wrap"><div class="search-box"><input class="search-box-input" id="search-input" type="text" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" placeholder="输入关键词快速查找"></div><div id="search-results"><div id="search-hits"><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/hexo_blog/tags/Solitude/')">Solitude</a><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/hexo_blog/tags/Hexo/')">Hexo</a></div></div><div id="search-pagination"></div><div id="search-tips"></div></div></div><div id="search-mask"></div></div><script src="/hexo_blog/js/search/local.js?v=1.12.3"></script><!-- Tianli-Talk--><!-- music--></body></html><script>const posts=["2024/09/23/JWT/","2024/09/23/微信小程序中文md5/","2024/09/23/拦截器/","2024/09/23/算法/算法笔记/"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); }</script>

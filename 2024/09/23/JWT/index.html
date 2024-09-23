@@ -1,0 +1,207 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>JWT介绍 | Hexo</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/hexo_blog/img/pwa/favicon.ico"><!-- index.css--><link rel="stylesheet" href="/hexo_blog/css/index.css?v=1.12.3"><!-- inject head--><link rel="canonical" href="https://rock027r.github.io/hexo_blog/2024/09/23/JWT/"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="JWT什么是JWT​ JWT(JSON WEB TOKEN)是一种开放标准（RFC 7519），它定义了一种紧凑的、自包含的方式，用于在各方之间以 JSON 对象安全地传输信息。JWT 可以对声明进行签名，从而确保数据的真实性和完整性，并且可以加密以保护数据的机密性。JWT 通常用于身份验证和授权场"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="Hexo"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/hexo_blog/img/pwa/favicon.ico"><link rel="apple-touch-icon" href="/hexo_blog/img/pwa/favicon.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '1.12.3' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>let mdate = "7-8,9-18,12-13";
+mdate = (mdate.split(","));
+let ndate = new Date();
+for (let i of mdate) {
+    if (i === (ndate.getMonth()+1) + "-" + (ndate.getDate())) {
+        document.documentElement.classList.add('memorial');
+    }
+}
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+    
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+    
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+    
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+    
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+        
+                if (name && keyObj[name]) return
+        
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+        }
+    })()</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/hexo_blog/',
+    algolia: undefined,
+    localsearch: {"preload":false,"path":"/search.xml"},
+    runtime: '2024-08-1 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.avif'
+    },
+    copyright: {"limit":50,"author":"作者: Locke","link":"链接: ","source":"来源: Hexo","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可","search":{"empty":"找不到你查询的内容：${query}","hit":"找到 ${hits} 条结果，用时 ${time} 毫秒","placeholder":"输入关键词快速查找","count":"共 <b>${count}</b> 条结果。"}},
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: [],
+        sayhello3: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    post_ai: false,
+    right_menu: false,
+};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude st-close-fill"></i></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude st-moon-clear-fill"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude st-side-bar-fill"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/hexo_blog/archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/hexo_blog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/hexo_blog/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude st-moon-clear-fill"></i><span>显示模式</span></span></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/hexo_blog/" title="返回博客主页"><span class="title">Locke</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">JWT介绍</a></div></div><div id="menus"></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索"><i class="solitude st-search-line"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude st-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude st-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="/hexo_blog/img/default.avif" alt="JWT介绍"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"></div></div></div></div><h1 class="post-title">JWT介绍</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2024-09-23 11:37:12"><i class="post-meta-icon solitude st-calendar-todo-fill"></i><time datetime="2024-09-23T11:37:12.321Z">2024-09-23T11:37:12.321Z</time></span><span class="post-meta-date" title="最后更新于 2024-09-23 11:37:12"><i class="post-meta-icon solitude st-refresh-line"></i><time datetime="2024-09-23T11:37:12.321Z">2024-09-23T11:37:12.321Z</time></span><a class="post-meta-pv" href="/hexo_blog/2024/09/23/JWT/" title="文章热度"><i class="post-meta-icon solitude st-fire-fill"></i></a></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h1><h2 id="什么是JWT"><a href="#什么是JWT" class="headerlink" title="什么是JWT"></a>什么是JWT</h2><p>​	JWT(JSON WEB TOKEN)是一种开放标准（RFC 7519），它定义了一种紧凑的、自包含的方式，用于在各方之间以 JSON 对象安全地传输信息。JWT 可以对声明进行签名，从而确保数据的真实性和完整性，并且可以加密以保护数据的机密性。JWT 通常用于身份验证和授权场景。</p>
+<h2 id="JWT的组成"><a href="#JWT的组成" class="headerlink" title="JWT的组成"></a>JWT的组成</h2><ul>
+<li><p><strong>Header（头部）</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;alg&quot;</span>: <span class="string">&quot;HS256&quot;</span>,<span class="comment">//加密算法</span></span><br><span class="line">  <span class="string">&quot;typ&quot;</span>: <span class="string">&quot;JWT&quot;</span><span class="comment">//令牌类型</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Payload（载荷）</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;sub&quot;</span>: <span class="string">&quot;1234567890&quot;</span>,</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;John Doe&quot;</span>,</span><br><span class="line">  <span class="string">&quot;admin&quot;</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Signature（签名）</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HMACSHA256(base64UrlEncode(header) + <span class="string">&quot;.&quot;</span> + base64UrlEncode(payload), secret);</span><br></pre></td></tr></table></figure>
+
+<p>​	将header和payload加密后用 “.”连接就是Signature(签名)</p>
+</li>
+</ul>
+<h2 id="生成JWT"><a href="#生成JWT" class="headerlink" title="生成JWT"></a>生成JWT</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">createToken</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">signature_key</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;<span class="comment">//为安全考虑 通常不是这么写的</span></span><br><span class="line">        <span class="type">JwtBuilder</span> <span class="variable">jwtBuilder</span> <span class="operator">=</span> Jwts.builder();</span><br><span class="line">        <span class="type">String</span> <span class="variable">JWTToken</span> <span class="operator">=</span> jwtBuilder</span><br><span class="line">                <span class="comment">//header</span></span><br><span class="line">                .setHeaderParam(<span class="string">&quot;typ&quot;</span>, <span class="string">&quot;JWT&quot;</span>)</span><br><span class="line">                .setHeaderParam(<span class="string">&quot;alg&quot;</span>, <span class="string">&quot;HS256&quot;</span>)</span><br><span class="line">                <span class="comment">//payload</span></span><br><span class="line">                .claim(<span class="string">&quot;user&quot;</span>, <span class="string">&quot;admin&quot;</span>)</span><br><span class="line">                .claim(<span class="string">&quot;roles&quot;</span>, <span class="string">&quot;admin&quot;</span>)</span><br><span class="line">                .setSubject(<span class="string">&quot;admin&quot;</span>)</span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">java</span>.util.Date(System.currentTimeMillis() +<span class="number">3000</span> ))</span><br><span class="line">                <span class="comment">//signature</span></span><br><span class="line">                .signWith(io.jsonwebtoken.SignatureAlgorithm.HS256, signature_key)</span><br><span class="line">                .compact();<span class="comment">//将整个 JWT 令牌序列化为字符串</span></span><br><span class="line">        <span class="keyword">return</span> JWTToken;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="校验JWT"><a href="#校验JWT" class="headerlink" title="校验JWT"></a>校验JWT</h2><p>​	如果token有错误或者过期了就会报错</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">checkToken</span><span class="params">(String token)</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">signature_key</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;<span class="comment">//为安全考虑 通常不是这么写的</span></span><br><span class="line">       <span class="keyword">try</span>&#123;</span><br><span class="line">           <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> Jwts.parser().setSigningKey(signature_key).parseClaimsJws(token).getBody();</span><br><span class="line">           <span class="type">Date</span> <span class="variable">expiration</span> <span class="operator">=</span> claims.getExpiration();</span><br><span class="line">           <span class="keyword">if</span> (expiration.before(<span class="keyword">new</span> <span class="title class_">Date</span>())) &#123;</span><br><span class="line">               <span class="comment">// JWT过期，需要重置token</span></span><br><span class="line">               <span class="comment">// <span class="doctag">TODO:</span> 重置token的逻辑</span></span><br><span class="line">               System.out.println(<span class="string">&quot;token expired&quot;</span>);</span><br><span class="line">               <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (ExpiredJwtException e) &#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;Token is expired&quot;</span>);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (UnsupportedJwtException e) &#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;Unsupported JWT token&quot;</span>);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (MalformedJwtException e) &#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;Malformed JWT token&quot;</span>);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (SignatureException e) &#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;Invalid JWT signature&quot;</span>);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">           System.out.println(<span class="string">&quot;Illegal argument token&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.demo.util;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">jwt</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">String</span> <span class="variable">signature_key</span> <span class="operator">=</span> <span class="string">&quot;123456&quot;</span>;<span class="comment">//为安全考虑 通常不是这么写的</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">createToken</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">JwtBuilder</span> <span class="variable">jwtBuilder</span> <span class="operator">=</span> Jwts.builder();</span><br><span class="line">        <span class="type">String</span> <span class="variable">JWTToken</span> <span class="operator">=</span> jwtBuilder</span><br><span class="line">                <span class="comment">//header</span></span><br><span class="line">                .setHeaderParam(<span class="string">&quot;typ&quot;</span>, <span class="string">&quot;JWT&quot;</span>)</span><br><span class="line">                .setHeaderParam(<span class="string">&quot;alg&quot;</span>, <span class="string">&quot;HS256&quot;</span>)</span><br><span class="line">                <span class="comment">//payload</span></span><br><span class="line">                .claim(<span class="string">&quot;user&quot;</span>, <span class="string">&quot;admin&quot;</span>)</span><br><span class="line">                .claim(<span class="string">&quot;roles&quot;</span>, <span class="string">&quot;admin&quot;</span>)</span><br><span class="line">                .setSubject(<span class="string">&quot;admin&quot;</span>)</span><br><span class="line">                .setExpiration(<span class="keyword">new</span> <span class="title class_">java</span>.util.Date(System.currentTimeMillis() +<span class="number">3000</span> ))</span><br><span class="line">                <span class="comment">//signature</span></span><br><span class="line">                .signWith(io.jsonwebtoken.SignatureAlgorithm.HS256, signature_key)</span><br><span class="line">                .compact();<span class="comment">//将整个 JWT 令牌序列化为字符串</span></span><br><span class="line">        <span class="keyword">return</span> JWTToken;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">checkToken</span><span class="params">(String token)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> Jwts.parser().setSigningKey(signature_key).parseClaimsJws(token).getBody();</span><br><span class="line">            <span class="type">Date</span> <span class="variable">expiration</span> <span class="operator">=</span> claims.getExpiration();</span><br><span class="line">            <span class="keyword">if</span> (expiration.before(<span class="keyword">new</span> <span class="title class_">Date</span>())) &#123;</span><br><span class="line">                <span class="comment">// JWT过期，需要重置token</span></span><br><span class="line">                <span class="comment">// <span class="doctag">TODO:</span> 重置token的逻辑</span></span><br><span class="line">                System.out.println(<span class="string">&quot;token expired&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ExpiredJwtException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Token is expired&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (UnsupportedJwtException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Unsupported JWT token&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (MalformedJwtException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Malformed JWT token&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SignatureException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Invalid JWT signature&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Illegal argument token&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> createToken();</span><br><span class="line">        System.out.println(token);</span><br><span class="line">        System.out.println(checkToken(token));</span><br><span class="line">        Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        System.out.println(checkToken(token));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个程序的输出的结果为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlcyI6ImFkbWluIiwic3ViIjoiYWRtaW4iLCJleHAiOjE3MjA2OTA4MDl9.S7gZajm8EtGZYc_BYKVOFIbktkalg_KnFQHbbAvW9TY<span class="comment">//生成的token</span></span><br><span class="line"><span class="literal">true</span><span class="comment">//校验结果</span></span><br><span class="line">Token is expired<span class="comment">//token过期了</span></span><br><span class="line"><span class="literal">false</span><span class="comment">//校验结果</span></span><br></pre></td></tr></table></figure>
+
+<p>讲上方生成的token复制到<a target="_blank" rel="noopener" href="https://jwt.io/">JSON Web Tokens - jwt.io</a>可以查看解密后的token</p>
+<h2 id="登录业务"><a href="#登录业务" class="headerlink" title="登录业务"></a>登录业务</h2><ol>
+<li>用户在客户端输入账号密码登录</li>
+<li>服务端校验密码</li>
+<li>密码正确，服务端生成一个token返回给客户端，客户端会将token存储下来（LocalStorage或者Session）</li>
+<li>客户端在后面的请求中都会携带token,服务器每次处理请求都会先校验一次token再返回客户端的请求</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/hexo_blog/about/"><img class="post-copyright__author_img_front" src= "/hexo_blog/img/loading.avif" data-lazy-src="/img/pwa/favicon.ico"></a><div class="post-copyright__author_name">Hexo</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/hexo_blog/">Hexo</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="next-post pull-full"><a href="/hexo_blog/2024/09/23/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87md5/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">微信小程序中文md5</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-bg-top"><div class="is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div></div><a class="card-info-avatar" href="/hexo_blog/about/" title="头像"><div class="avatar-img"><img src= "/hexo_blog/img/loading.avif" data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=1011278778&amp;s=640" alt="头像"></div><div class="avatar-sticker"><img class="avatar-sticker-img" src= "/hexo_blog/img/loading.avif" data-lazy-src="https://7.isyangs.cn/34/65f2e4e0423cc-34.png" alt="心情贴纸"></div></a><div class="card-info__desc_group"><div class="author-info__name">Locke</div><div class="author-info__desc"></div><div class="card-info__data is-center"><a href="/hexo_blog/archives/" title="累计文章数:4"><div class="length-num">4</div><div class="headline">文章</div></a><a href="/hexo_blog/tags/" title="标签总数:0"><div class="length-num">0</div><div class="headline">标签</div></a><a href="/hexo_blog/categories/" title="分类总数:0"><div class="length-num">0</div><div class="headline">分类</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/rock027r" title="Github"><i class="solitude  st-github-line"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/357338721" title="Bilibili"><i class="solitude  st-bilibili-line"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://imgos.cn/2024/08/10/66b6ea1d7f9cb.png" title="Wechat"><i class="solitude  st-wechat-line"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude st-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JWT"><span class="toc-text">JWT</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFJWT"><span class="toc-text">什么是JWT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">JWT的组成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90JWT"><span class="toc-text">生成JWT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%A1%E9%AA%8CJWT"><span class="toc-text">校验JWT</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BE%8B"><span class="toc-text">实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E4%B8%9A%E5%8A%A1"><span class="toc-text">登录业务</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude st-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/hexo_blog/2024/09/23/JWT/" title="JWT介绍"><img alt="JWT介绍" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif"></a><div class="content"><a class="title" href="/hexo_blog/2024/09/23/JWT/" title="JWT介绍">JWT介绍</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo_blog/2024/09/23/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87md5/" title="微信小程序中文md5"><img alt="微信小程序中文md5" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif"></a><div class="content"><a class="title" href="/hexo_blog/2024/09/23/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87md5/" title="微信小程序中文md5">微信小程序中文md5</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo_blog/2024/09/23/%E6%8B%A6%E6%88%AA%E5%99%A8/" title="拦截器"><img alt="拦截器" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif"></a><div class="content"><a class="title" href="/hexo_blog/2024/09/23/%E6%8B%A6%E6%88%AA%E5%99%A8/" title="拦截器">拦截器</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" title="算法笔记"><img alt="算法笔记" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif"></a><div class="content"><a class="title" href="/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" title="算法笔记">算法笔记</a></div></div></div></div></div></div></main><footer id="footer"><div id="st-footer-bar"><div class="footer-logo"><span>Locke</span></div><div class="footer-bar-description">来自 Locke 的文章</div><a class="footer-bar-link" href="/hexo_blog/about/">了解更多</a></div><div id="footer_deal"></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2024 By&nbsp;<a class="footer-bar-link" href="/hexo_blog/">Locke</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" alt="主题">主题</a><a class="footer-bar-link cc" href="/hexo_blog/null" aria-label="copyright"><i class="solitude st-copyright-line"></i><i class="solitude st-creative-commons-by-line"></i><i class="solitude st-creative-commons-nc-line"></i><i class="solitude st-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- right_menu--><!-- inject body--><div><script src="/hexo_blog/js/utils.js?v=1.12.3"></script><script src="/hexo_blog/js/main.js?v=1.12.3"></script><script src="/hexo_blog/js/third_party/waterfall.min.js?v=1.12.3"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/hexo_blog/js/third_party/universe.min.js?v=1.12.3"></script><script>dark()
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/19.1.3/lazyload.iife.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: ['title','#body-wrap','#site-config','meta[name="description"]','.js-pjax','meta[property^="og:"]','#config-diff'],
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><!-- google adsense--><!-- search--><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="solitude st-close-fill"></i></button></nav><div class="search-wrap"><div class="search-box"><input class="search-box-input" id="search-input" type="text" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" placeholder="输入关键词快速查找"></div><div id="search-results"><div id="search-hits"><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/hexo_blog/tags/Solitude/')">Solitude</a><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/hexo_blog/tags/Hexo/')">Hexo</a></div></div><div id="search-pagination"></div><div id="search-tips"></div></div></div><div id="search-mask"></div></div><script src="/hexo_blog/js/search/local.js?v=1.12.3"></script><!-- Tianli-Talk--><!-- music--></body></html><script>const posts=["2024/09/23/JWT/","2024/09/23/微信小程序中文md5/","2024/09/23/拦截器/","2024/09/23/算法/算法笔记/"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); }</script>

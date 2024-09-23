@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>算法笔记 | Hexo</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/hexo_blog/img/pwa/favicon.ico"><!-- index.css--><link rel="stylesheet" href="/hexo_blog/css/index.css?v=1.12.3"><!-- inject head--><link rel="canonical" href="https://rock027r.github.io/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"><link rel="stylesheet" href="https://cdn2.codesign.qq.com/icons/7pOrz0WXB5ZWJPX/latest/iconfont.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="算法学习一、模板1234567891011121314151617181920#include&amp;lt;bits&amp;#x2F;stdc++.h&amp;gt;using namespace std;using ll &amp;#x3D; long long;const int N &amp;#x3D; 1e5 + 9;void solve()&amp;#123;"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="Hexo"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/hexo_blog/img/pwa/favicon.ico"><link rel="apple-touch-icon" href="/hexo_blog/img/pwa/favicon.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '1.12.3' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>let mdate = "7-8,9-18,12-13";
+mdate = (mdate.split(","));
+let ndate = new Date();
+for (let i of mdate) {
+    if (i === (ndate.getMonth()+1) + "-" + (ndate.getDate())) {
+        document.documentElement.classList.add('memorial');
+    }
+}
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+    
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+    
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+    
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+    
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+        
+                if (name && keyObj[name]) return
+        
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+        }
+    })()</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/hexo_blog/',
+    algolia: undefined,
+    localsearch: {"preload":false,"path":"/search.xml"},
+    runtime: '2024-08-1 00:00:00',
+    lazyload: {
+        enable: true,
+        error: '/img/error_load.avif'
+    },
+    copyright: {"limit":50,"author":"作者: Locke","link":"链接: ","source":"来源: Hexo","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可","search":{"empty":"找不到你查询的内容：${query}","hit":"找到 ${hits} 条结果，用时 ${time} 毫秒","placeholder":"输入关键词快速查找","count":"共 <b>${count}</b> 条结果。"}},
+    aside: {
+        sayhello: {
+            morning: '一日之计在于晨',
+            noon: '吃饱了才有力气干活',
+            afternoon: '集中精力，攻克难关',
+            night: '不要太劳累了，早睡更健康',
+            goodnight: '睡个好觉，保证精力充沛',
+        },
+        sayhello2: [],
+        sayhello3: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    post_ai: false,
+    right_menu: false,
+};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><!-- universe--><canvas id="universe"></canvas><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude st-close-fill"></i></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude st-moon-clear-fill"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude st-side-bar-fill"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/hexo_blog/archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/hexo_blog/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/hexo_blog/tags/"><div class="headline">标签</div><div class="length-num">0</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude st-moon-clear-fill"></i><span>显示模式</span></span></div><span class="sidebar-menu-item-title">标签</span><div class="card-widget card-tags card-archives card-webinfo card-allinfo"><div class="card-tag-cloud"></div></div></div></div><!-- keyboard--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/hexo_blog/" title="返回博客主页"><span class="title">Locke</span></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">算法笔记</a></div></div><div id="menus"></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索"><i class="solitude st-search-line"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude st-arrow-up-line"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude st-menu-line"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="/hexo_blog/img/default.avif" alt="算法笔记"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"></div></div></div></div><h1 class="post-title">算法笔记</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2024-09-23 11:37:12"><i class="post-meta-icon solitude st-calendar-todo-fill"></i><time datetime="2024-09-23T11:37:12.321Z">2024-09-23T11:37:12.321Z</time></span><span class="post-meta-date" title="最后更新于 2024-09-23 11:37:12"><i class="post-meta-icon solitude st-refresh-line"></i><time datetime="2024-09-23T11:37:12.321Z">2024-09-23T11:37:12.321Z</time></span><a class="post-meta-pv" href="/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" title="文章热度"><i class="post-meta-icon solitude st-fire-fill"></i></a></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="算法学习"><a href="#算法学习" class="headerlink" title="算法学习"></a>算法学习</h1><h2 id="一、模板"><a href="#一、模板" class="headerlink" title="一、模板"></a>一、模板</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">1e5</span> + <span class="number">9</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>),cin.<span class="built_in">tie</span>(<span class="number">0</span>),cout.<span class="built_in">tie</span>(<span class="number">0</span>);<span class="comment">//取消同步流 不能使用scanf</span></span><br><span class="line">    <span class="type">int</span> t;cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">solve</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、输入输出"><a href="#二、输入输出" class="headerlink" title="二、输入输出"></a>二、输入输出</h2><p>输出流</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">cout &lt;&lt; dec &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">cout &lt;&lt; oct &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">cout &lt;&lt; hex &lt;&lt; a &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">cout &lt;&lt; <span class="built_in">bitset</span>(<span class="number">5</span>)(a) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>格式化输入</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//cin 什么时候结束 空格和换行</span></span><br><span class="line"><span class="comment">//例： 输入： sohdasi sdiosd s sd sd s d</span></span><br><span class="line"><span class="built_in">getline</span>(cin,a);<span class="comment">//读入一行 </span></span><br><span class="line"><span class="comment">//例： 输入 10：10</span></span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d:%d&quot;</span>);</span><br><span class="line">cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line"><span class="comment">//例： 输入字符串12314129</span></span><br><span class="line"><span class="comment">//9为结束标志</span></span><br><span class="line"><span class="keyword">while</span>(cin &gt;&gt; a &amp;&amp;  a!=<span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>换行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cout &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">cout &lt;&lt; endl;<span class="comment">//强制清除缓冲区</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、时间复杂度"><a href="#三、时间复杂度" class="headerlink" title="三、时间复杂度"></a>三、时间复杂度</h2><p>​	为了避免超时，我们一般将代码的运行次数控制在10^7 - 10^8</p>
+<p>​	下面给出在不同数据范围下，代码的时间复杂度和算法该如何选择：</p>
+<ol>
+<li><p>n &lt; 30, 指数级别: DFS + 剪枝，状态压缩DP</p>
+</li>
+<li><p>n ≤ 100, 时间复杂度 O(n²): Floyd，DP，高斯消元</p>
+</li>
+<li><p>n ≤ 1000, 时间复杂度 O(n²)，O(n²logn): DP，二分，朴素版Dijkstra、朴素版Prim、Bellman-Ford</p>
+</li>
+<li><p>n ≤ 10000, 时间复杂度 O(n * √n): 块状链表、分块、莫队</p>
+</li>
+<li><p>n ≤ 100000, 时间复杂度 O(nlogn): 各种sort，线段树、树状数组、set&#x2F;map、heap、拓扑排序、Dijkstra + heap、Prim + heap、Kruskal、SPFA、求凸包、求半平面交、二分、CDQ分治、整体二分、后缀数组、树链剖分、动态树</p>
+</li>
+<li><p>n ≤ 1000000, 时间复杂度 O(n), 以及常数较小的 O(nlogn)算法: 单调队列、hash、双指针扫描、BFS、并查集、KMP、AC自动机、常数比较小的 O(nlogn)的做法：sort、树状数组、heap、Dijkstra、SPFA</p>
+</li>
+<li><p>n ≤ 10000000, 时间复杂度 O(n): 双指针扫描、KMP、AC自动机、线性筛素数</p>
+</li>
+<li><p>n ≤ 10^9, 时间复杂度 O(√n): 判断质数</p>
+</li>
+<li><p>n ≤ 10^18, 时间复杂度 O(logn): 最大公约数，快速幂，数位DP</p>
+</li>
+<li><p>n ≤ 10^1000, 时间复杂度 O((logn)²): 高精度加减乘除</p>
+</li>
+<li><p>n ≤ 10^10000, 时间复杂度 O(logk × loglogk): k表示位数，高精度加减、FFT&#x2F;NTT</p>
+</li>
+</ol>
+<p><strong>怎么计算自己代码的时间复杂度</strong></p>
+<p><strong>线性阶O(n)</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">&#123;</span><br><span class="line">   j = i;</span><br><span class="line">   j++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>对数阶O(logN)</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(i&lt;n)</span><br><span class="line">&#123;</span><br><span class="line">    i = i * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从上面代码可以看到，在while循环里面，每次都将 i 乘以 2，乘完之后，i 距离 n 就越来越近了。我们试着求解一下，假设循环x次之后，i 就大于 2 了，此时这个循环就退出了，也就是说 2 的 x 次方等于 n，那么 x &#x3D; log2^n<br>也就是说当循环 log2^n 次以后，这个代码就结束了。因此这个代码的时间复杂度为：O(logn)</p>
+<p><strong>线性对数阶O(nlogN)</strong><br>线性对数阶O(nlogN) 其实非常容易理解，将时间复杂度为O(logn)的代码循环N遍的话，那么它的时间复杂度就是 n * O(logN)，也就是了O(nlogN)。</p>
+<p>就拿上面的代码加一点修改来举例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(m=<span class="number">1</span>; m&lt;n; m++)</span><br><span class="line">&#123;</span><br><span class="line">    i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;n)</span><br><span class="line">    &#123;</span><br><span class="line">        i = i * <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>平方阶O(n2)</strong><br>平方阶O(n²) 就更容易理解了，如果把 O(n) 的代码再嵌套循环一遍，它的时间复杂度就是 O(n²) 了。<br>举例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(x=<span class="number">1</span>; i&lt;=n; x++)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">       j = i;</span><br><span class="line">       j++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码其实就是嵌套了2层n循环，它的时间复杂度就是 O(n*n)，即 O(n²)<br>如果将其中一层循环的n改成m，即：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(x=<span class="number">1</span>; i&lt;=m; x++)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">       j = i;</span><br><span class="line">       j++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那它的时间复杂度就变成了 O(m*n)</p>
+<p>立方阶O(n³)、K次方阶O(n^k)<br>参考上面的O(n²) 去理解就好了，O(n³)相当于三层n循环，其它的类似。</p>
+<p>除此之外，其实还有 平均时间复杂度、均摊时间复杂度、最坏时间复杂度、最好时间复杂度 的分析方法，有点复杂，这里就不展开了。</p>
+<h2 id="四、前缀和与差分"><a href="#四、前缀和与差分" class="headerlink" title="四、前缀和与差分"></a>四、前缀和与差分</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一维</span></span><br><span class="line">a[N]  prefix[N]</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    prefix[i] = prefix[i<span class="number">-1</span>] + a[i]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//l-r 区间求和</span></span><br><span class="line">    prefix[r] - prefix[l<span class="number">-1</span>]</span><br><span class="line">    </span><br><span class="line"><span class="comment">//二维</span></span><br><span class="line">a[N][N] prefix[N][N]</span><br><span class="line">    </span><br><span class="line">    prefix[i][j] = prefix[i][j<span class="number">-1</span>] + prefix[i<span class="number">-1</span>][j] -p[i<span class="number">-1</span>][j<span class="number">-1</span>] + a[i][j]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//x1 y1-x2 y2</span></span><br><span class="line">    anx = prefix[x2][y2] - prefix[x1][y2<span class="number">-1</span>] - prefix[x2][y1<span class="number">-1</span>] + prefix[x1<span class="number">-1</span>][y1<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一维</span></span><br><span class="line">a[N] diff[N]</span><br><span class="line">    </span><br><span class="line">    diff[i] = a[i] - a[i<span class="number">-1</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//l-r 区间修改</span></span><br><span class="line">    diff[l]+=x;</span><br><span class="line">	diff[r<span class="number">+1</span>]-=x;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//求a[i]</span></span><br><span class="line">	a[i] = diff[i] + a[i<span class="number">-1</span>]</span><br><span class="line">        </span><br><span class="line"><span class="comment">//二维</span></span><br><span class="line">a[N][N] diff[N][N]</span><br><span class="line">     </span><br><span class="line">    d[i][j] += a[i][j]</span><br><span class="line">	d[i + <span class="number">1</span>][j] -= a[i][j]</span><br><span class="line">	d[i][j + <span class="number">1</span>] -= a[i][j]</span><br><span class="line">	d[i + <span class="number">1</span>][j + <span class="number">1</span>] += a[i][j]</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//x1 y1 - x2 y2 区间修改</span></span><br><span class="line">	diff[x1][y1] +=x</span><br><span class="line">	diff[x2<span class="number">+1</span>][y2<span class="number">+1</span>] -=x</span><br><span class="line">	</span><br><span class="line">    <span class="comment">//求a[i][j]</span></span><br><span class="line">    a[i][j] = a[i - <span class="number">1</span>][j] + a[i][j - <span class="number">1</span>] - a[i - <span class="number">1</span>][j - <span class="number">1</span>] + d[i][j];</span><br></pre></td></tr></table></figure>
+<p>例题<br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P8218">P8218 【深进1.例1】求区间和 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1719">P1719 最大加权矩形 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1115">P1115 最大子段和 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2367">P2367 语文成绩 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3397">P3397 地毯 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P2004">P2004 领地选择 - 洛谷 | 计算机科学教育新生态 (luogu.com.cn)</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><a class="post-copyright__author_img" href="/hexo_blog/about/"><img class="post-copyright__author_img_front" src= "/hexo_blog/img/loading.avif" data-lazy-src="/img/pwa/favicon.ico"></a><div class="post-copyright__author_name">Hexo</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/hexo_blog/">Hexo</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/hexo_blog/2024/09/23/%E6%8B%A6%E6%88%AA%E5%99%A8/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">拦截器</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-bg-top"><div class="is-center"><div class="author-info__top-group"><div class="author-info__sayhi" id="author-info__sayhi" onclick="sco.changeSayHelloText()">sayhello.morning</div></div></div></div><a class="card-info-avatar" href="/hexo_blog/about/" title="头像"><div class="avatar-img"><img src= "/hexo_blog/img/loading.avif" data-lazy-src="https://q1.qlogo.cn/g?b=qq&amp;nk=1011278778&amp;s=640" alt="头像"></div><div class="avatar-sticker"><img class="avatar-sticker-img" src= "/hexo_blog/img/loading.avif" data-lazy-src="https://7.isyangs.cn/34/65f2e4e0423cc-34.png" alt="心情贴纸"></div></a><div class="card-info__desc_group"><div class="author-info__name">Locke</div><div class="author-info__desc"></div><div class="card-info__data is-center"><a href="/hexo_blog/archives/" title="累计文章数:4"><div class="length-num">4</div><div class="headline">文章</div></a><a href="/hexo_blog/tags/" title="标签总数:0"><div class="length-num">0</div><div class="headline">标签</div></a><a href="/hexo_blog/categories/" title="分类总数:0"><div class="length-num">0</div><div class="headline">分类</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/rock027r" title="Github"><i class="solitude  st-github-line"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/357338721" title="Bilibili"><i class="solitude  st-bilibili-line"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://imgos.cn/2024/08/10/66b6ea1d7f9cb.png" title="Wechat"><i class="solitude  st-wechat-line"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude st-menu-line"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0"><span class="toc-text">算法学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A8%A1%E6%9D%BF"><span class="toc-text">一、模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="toc-text">二、输入输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="toc-text">三、时间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86"><span class="toc-text">四、前缀和与差分</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude st-map-line"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/hexo_blog/2024/09/23/JWT/" title="JWT介绍"><img alt="JWT介绍" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif"></a><div class="content"><a class="title" href="/hexo_blog/2024/09/23/JWT/" title="JWT介绍">JWT介绍</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo_blog/2024/09/23/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87md5/" title="微信小程序中文md5"><img alt="微信小程序中文md5" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif"></a><div class="content"><a class="title" href="/hexo_blog/2024/09/23/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87md5/" title="微信小程序中文md5">微信小程序中文md5</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo_blog/2024/09/23/%E6%8B%A6%E6%88%AA%E5%99%A8/" title="拦截器"><img alt="拦截器" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif"></a><div class="content"><a class="title" href="/hexo_blog/2024/09/23/%E6%8B%A6%E6%88%AA%E5%99%A8/" title="拦截器">拦截器</a></div></div><div class="aside-list-item"><a class="thumbnail" href="/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" title="算法笔记"><img alt="算法笔记" src= "/hexo_blog/img/loading.avif" data-lazy-src="/hexo_blog/img/default.avif"></a><div class="content"><a class="title" href="/hexo_blog/2024/09/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" title="算法笔记">算法笔记</a></div></div></div></div></div></div></main><footer id="footer"><div id="st-footer-bar"><div class="footer-logo"><span>Locke</span></div><div class="footer-bar-description">来自 Locke 的文章</div><a class="footer-bar-link" href="/hexo_blog/about/">了解更多</a></div><div id="footer_deal"></div><div id="st-footer"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2024 By&nbsp;<a class="footer-bar-link" href="/hexo_blog/">Locke</a></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" alt="主题">主题</a><a class="footer-bar-link cc" href="/hexo_blog/null" aria-label="copyright"><i class="solitude st-copyright-line"></i><i class="solitude st-creative-commons-by-line"></i><i class="solitude st-creative-commons-nc-line"></i><i class="solitude st-creative-commons-nd-line"></i></a></div></div></div></footer></div><!-- right_menu--><!-- inject body--><div><script src="/hexo_blog/js/utils.js?v=1.12.3"></script><script src="/hexo_blog/js/main.js?v=1.12.3"></script><script src="/hexo_blog/js/third_party/waterfall.min.js?v=1.12.3"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pjax/0.2.8/pjax.min.js"></script><script src="/hexo_blog/js/third_party/universe.min.js?v=1.12.3"></script><script>dark()
+</script><script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-lazyload/19.1.3/lazyload.iife.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/node-snackbar/0.1.16/snackbar.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: ['title','#body-wrap','#site-config','meta[name="description"]','.js-pjax','meta[property^="og:"]','#config-diff'],
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><!-- google adsense--><!-- search--><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><button class="search-close-button"><i class="solitude st-close-fill"></i></button></nav><div class="search-wrap"><div class="search-box"><input class="search-box-input" id="search-input" type="text" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" placeholder="输入关键词快速查找"></div><div id="search-results"><div id="search-hits"><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/hexo_blog/tags/Solitude/')">Solitude</a><a class="tag-list" href="javascript:void(0);" onclick="pjax.loadUrl('/hexo_blog/tags/Hexo/')">Hexo</a></div></div><div id="search-pagination"></div><div id="search-tips"></div></div></div><div id="search-mask"></div></div><script src="/hexo_blog/js/search/local.js?v=1.12.3"></script><!-- Tianli-Talk--><!-- music--></body></html><script>const posts=["2024/09/23/JWT/","2024/09/23/微信小程序中文md5/","2024/09/23/拦截器/","2024/09/23/算法/算法笔记/"];function toRandomPost(){ pjax.loadUrl('/'+posts[Math.floor(Math.random()*posts.length)]); }</script>
